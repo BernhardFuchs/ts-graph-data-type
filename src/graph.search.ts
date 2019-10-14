@@ -14,15 +14,20 @@ export interface SearchOptions {
 const defaultOptions: SearchOptions = {
   algorithm: Algorithm.BREADTH_FIRST,
   level: null
-}
+};
 
-const isDefaultAlgorithm = (searchOptions: SearchOptions) => searchOptions.algorithm === defaultOptions.algorithm;
-const isInfiniteSearch = (searchOptions: SearchOptions) => searchOptions.level === null;
-const isSearchLevelValid = (searchOptions: SearchOptions) => searchOptions.level <= 0;
+const isDefaultAlgorithm = (searchOptions: SearchOptions) =>
+  searchOptions.algorithm === defaultOptions.algorithm;
+const isInfiniteSearch = (searchOptions: SearchOptions) =>
+  searchOptions.level === null;
+const isSearchLevelValid = (searchOptions: SearchOptions) =>
+  searchOptions.level <= 0;
 const isQueueEmpty = <T>(_q: Queue<Node<T>>) => _q.size === 0;
-const increaseDepth = (nodesTillDepthIncrease: number) => nodesTillDepthIncrease === 0;
+const increaseDepth = (nodesTillDepthIncrease: number) =>
+  nodesTillDepthIncrease === 0;
 
-const endSearch = <T>(graph: Graph<T>, visited: Map<T, boolean>) => graph.nodes.filter(node => visited.get(node.key));
+const endSearch = <T>(graph: Graph<T>, visited: Map<T, boolean>) =>
+  graph.nodes.filter(node => visited.get(node.key));
 
 export const search = <T>(
   graph: Graph<T>,
@@ -37,32 +42,35 @@ export const search = <T>(
   }
 
   if (!isDefaultAlgorithm(_searchOptions)) {
-    console.log('At the moment only Breadth First Algorithm available.');
+    console.log("At the moment only Breadth First Algorithm available.");
   }
 
   const _visited: Map<T, boolean> = new Map();
   graph.nodes.map(node => _visited.set(node.key, false));
 
   const _q = new Queue<Node<T>>();
-  _q.enqueue(_startingNode);
+  _q.push(_startingNode);
 
   let currentDepth = 0,
     nodesTillDepthIncrease = 1,
     nodeChildren = 0;
 
   while (!isQueueEmpty(_q)) {
-    const currentNode = _q.dequeue();
+    const currentNode = _q.pop();
     _visited.set(currentNode.key, true);
     nodeChildren = currentNode.children.length;
 
     currentNode.children.map(childNode => {
       if (_visited.get(childNode.key) === false) {
-        _q.enqueue(childNode);
+        _q.push(childNode);
         _visited.set(childNode.key, true);
       }
-    })
+    });
 
-    if (!isInfiniteSearch(_searchOptions) && increaseDepth(--nodesTillDepthIncrease)) {
+    if (
+      !isInfiniteSearch(_searchOptions) &&
+      increaseDepth(--nodesTillDepthIncrease)
+    ) {
       if (++currentDepth === _searchOptions.level) {
         return endSearch(graph, _visited);
       }
