@@ -1,7 +1,7 @@
 import { Graph } from "./graph";
 import { GraphEntities } from "./graph.entities";
 import Node = GraphEntities.Node;
-import { nodeFactory } from "./graph.spec.helper";
+import { nodeFactory } from "./graph.helper.spec";
 
 describe("Graph tests", () => {
   test("should create a non directed graph by default", () => {

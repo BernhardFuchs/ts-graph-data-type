@@ -1,6 +1,6 @@
 import { GraphEntities } from "./graph.entities";
 import Node = GraphEntities.Node;
-import { circularGraph } from "./graph.spec.helper";
+import { circularGraph } from "./graph.helper.spec";
 import { search } from "./graph.search";
 
 describe("Graph search non directed graph", () => {
