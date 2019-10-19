@@ -1,6 +1,6 @@
 import { Graph } from "./graph";
-import { GraphEntities } from "./graph.entities";
-import Node = GraphEntities.Node;
+import { Entities } from "./entities";
+import Node = Entities.Node;
 
 export const nodeFactory = <T>(key: T): Node<T> => {
   return { key, children: new Array<Node<T>>() };

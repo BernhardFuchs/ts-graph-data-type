@@ -1,4 +1,4 @@
-export namespace GraphEntities {
+export namespace Entities {
   export type Node<T> = {
     key: T;
     children: Array<Node<T>>;

@@ -1,7 +1,7 @@
-import { GraphEntities } from "./graph.entities";
-import Node = GraphEntities.Node;
-import { circularGraph } from "./graph.helper.spec";
-import { search } from "./graph.search";
+import { Entities } from "./entities";
+import Node = Entities.Node;
+import { circularGraph } from "./helper.spec";
+import { search } from "./search";
 
 describe("Graph search non directed graph", () => {
   const nonDirectedGraph = circularGraph(false);

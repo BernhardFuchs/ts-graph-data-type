@@ -2,8 +2,8 @@
   "name": "devfox-ts-adt-graph",
   "version": "1.0.0",
   "description": "Graph Abstract Data Type in Typescript",
-  "main": "lib/graph.js",
-  "types": "lib/queue.d.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "prepublishOnly": "npm run build",
     "build": "rm -rf ./lib && tsc -p .",
