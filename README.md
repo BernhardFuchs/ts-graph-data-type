@@ -73,6 +73,8 @@ Add Edges:
 const node1 = { key: 1, children: [] };
 const node2 = { key: 2, children: [] };
 
+graph.addNode(node1);
+graph.addNode(node2);
 graph.addEdge(node1.key, node2.key);
 
 // Non-directed graph
