@@ -4,7 +4,7 @@ import { circularGraph } from "./graph.spec";
 import { search } from "./search";
 
 describe("Graph search non directed graph", () => {
-  const nonDirectedGraph = circularGraph(false);
+  const nonDirectedGraph = circularGraph();
 
   test("should return correct nodes for infinite depth", () => {
     const startingNode: number = 0;
@@ -74,7 +74,7 @@ describe("Graph search non directed graph", () => {
 });
 
 describe("Graph search directed graph", () => {
-  const directedGraph = circularGraph(true);
+  const directedGraph = circularGraph("DIRECTED");
 
   test("should return correct nodes for infinite depth", () => {
     const startingNode: number = 0;

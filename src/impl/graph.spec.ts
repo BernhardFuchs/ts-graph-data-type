@@ -3,14 +3,14 @@ import { Entities } from "./entities";
 import Node = Entities.Node;
 
 const nodeFactory = <T>(key: T): Node<T> => {
-  return { key, children: new Array<Node<T>>() };
+  return { key, children: [] };
 };
 
 const graphFactory = (
   numberOfNodes: number,
-  isDirected: boolean
+  direction: string
 ): Graph<number> => {
-  const graph = new Graph<number>(isDirected);
+  const graph = new Graph<number>(direction);
   for (let i = 0; i < numberOfNodes; i++) {
     const node: Node<number> = nodeFactory(i);
     graph.addNode(node);
@@ -18,8 +18,9 @@ const graphFactory = (
   return graph;
 };
 
-export const circularGraph = (isDirected: boolean): Graph<number> => {
-  const graph = graphFactory(7, isDirected);
+export const circularGraph = (direction: string = ""): Graph<number> => {
+  const numberOfNodes = 7;
+  const graph = graphFactory(numberOfNodes, direction);
   graph.addEdge(0, 1);
   graph.addEdge(0, 3);
   graph.addEdge(0, 4);
@@ -42,19 +43,46 @@ describe("Graph tests", () => {
     expect(graph.findNode(2).children).toContain(graph.findNode(1));
   });
 
-  test("should create a correct directed graph", () => {
-    const graph: Graph<number> = new Graph(true);
+  const directedGraphTest = (graph: Graph<number>) => {
     graph.addNode(nodeFactory(1));
     graph.addNode(nodeFactory(2));
     graph.addEdge(1, 2);
     expect(graph.findNode(1).children).toContain(graph.findNode(2));
     expect(graph.findNode(2).children).toHaveLength(0);
+  };
+
+  test("should create a correct directed graph lowercase", () => {
+    const graph: Graph<number> = new Graph("DIRECTED");
+    directedGraphTest(graph);
   });
 
-  test("should create graph with complex data type", () => {
+  test("should create a correct directed graph random case", () => {
+    const graph: Graph<number> = new Graph("DiReCteD");
+    directedGraphTest(graph);
+  });
+
+  test("should create graph with complex data type as key", () => {
+    type ComplexKeyType = {
+      accountNumber: number;
+      accountHolder: string;
+    };
+    const graph: Graph<ComplexKeyType> = new Graph();
+
+    const key1: ComplexKeyType = { accountNumber: 1, accountHolder: "Person1" };
+    graph.addNode(nodeFactory(key1));
+    const key2: ComplexKeyType = { accountNumber: 2, accountHolder: "Person2" };
+    graph.addNode(nodeFactory(key2));
+
+    graph.addEdge(key1, key2);
+
+    expect(graph.findNode(key1).children).toContain(graph.findNode(key2));
+    expect(graph.findNode(key2).children).toContain(graph.findNode(key1));
+  });
+
+  test("should create graph with additional data", () => {
     type NodeWithData<T> = Node<T> & {
       accountNumber: number;
-      transactions: Array<string>;
+      transactions: string[];
     };
     const complexNode1: NodeWithData<number> = {
       key: 0,

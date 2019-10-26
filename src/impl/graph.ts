@@ -5,8 +5,14 @@ import Edge = Entities.Edge;
 export class Graph<T> {
   private _nodes: Node<T>[] = [];
   private _edges: Edge<T>[] = [];
+  private _isDirected: boolean;
+  private readonly DIRECTED: string = "DIRECTED";
 
-  constructor(private isDirected: boolean = false) {}
+  constructor(private direction: string = "") {
+    this._isDirected = this.direction.toUpperCase().match(this.DIRECTED)
+      ? true
+      : false;
+  }
 
   public get nodes(): Node<T>[] {
     return this._nodes;
@@ -30,7 +36,7 @@ export class Graph<T> {
 
     node1.children.push(node2);
 
-    if (!this.isDirected) {
+    if (!this._isDirected) {
       node2.children.push(node1);
     }
 
