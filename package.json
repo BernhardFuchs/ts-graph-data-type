@@ -1,5 +1,5 @@
 {
-  "name": "devfox-ts-adt-graph",
+  "name": "devfox-graph",
   "version": "1.0.0",
   "description": "Graph Abstract Data Type in Typescript",
   "main": "lib/index.js",

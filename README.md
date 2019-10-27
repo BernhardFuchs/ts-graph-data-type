@@ -2,10 +2,8 @@
 
 ## Install
 
-Install `devfox-ts-adt-graph`:
-
 ```bash
-npm install devfox-ts-adt-graph
+npm install devfox-graph
 ```
 
 ## Usage
