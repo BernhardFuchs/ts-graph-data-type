@@ -15,12 +15,12 @@ npm install devfox-ts-adt-graph
 Create a `Graph` with primitive data-type as key:
 
 ```typescript
-import { Graph } from "devfox-ts-adt-graph";
+import { Graph, Direction } from "devfox-ts-adt-graph";
 
 // Default Graph is a non-directed Graph
 const graph: Graph<string> = new Graph();
-// If the graph should be directed pass 'DIRECTED' to the constructor
-const graph: Graph<number> = new Graph("DIRECTED");
+// If the graph should be directed pass Direction.DIRECTED to the constructor
+const graph: Graph<number> = new Graph(Direction.DIRECTED);
 ```
 
 Create a `Graph` with complex data-type as key:
@@ -84,4 +84,24 @@ node2.children; // will contain node1
 // Directed graph
 node1.children; // will contain node2
 node2.children; // will be empty
+```
+
+### Search Operations
+
+#### Get descendants of a `Node`
+
+```typescript
+import { getDescendants } from "devfox-ts-adt-graph";
+
+// Get an array with all descendants for a given node
+const network: Node<T>[] = getDescendants(graph, startingNode);
+
+// Apply SearchOptions example
+const searchOptions: SearchOptions = {
+  algorithm: Algorithm.BREADTH_FIRST,
+  level: 1
+};
+
+// Returns Descendants One Level deep and uses Breadth-first algorithm
+const network: Node<T>[] = getDescendants(graph, startingNode, searchOptions);
 ```
