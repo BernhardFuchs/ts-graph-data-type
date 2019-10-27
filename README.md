@@ -10,7 +10,7 @@ npm install devfox-graph
 
 ### Graph
 
-Create a `Graph` with primitive data-type as key:
+#### Create a `Graph` with primitive data-type as key
 
 ```typescript
 import { Graph, Direction } from "devfox-ts-adt-graph";
@@ -21,7 +21,7 @@ const graph: Graph<string> = new Graph();
 const graph: Graph<number> = new Graph(Direction.DIRECTED);
 ```
 
-Create a `Graph` with complex data-type as key:
+#### Create a `Graph` with complex data-type as key
 
 ```typescript
 import { Graph } from "devfox-ts-adt-graph";
@@ -34,7 +34,7 @@ type ComplexKeyType = {
 const graph: Graph<ComplexKeyType> = new Graph();
 ```
 
-Create Nodes:
+#### Create Nodes
 
 ```typescript
 import { Entities } from "devfox-ts-adt-graph";
@@ -65,7 +65,7 @@ const complexNode: NodeWithData<number> = {
 graph.addNode(complexNode);
 ```
 
-Add Edges:
+#### Add Edges
 
 ```typescript
 const node1 = { key: 1, children: [] };
