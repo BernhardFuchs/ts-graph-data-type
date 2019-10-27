@@ -1,7 +1,7 @@
 import { Entities } from "./entities";
 import Node = Entities.Node;
 import { Graph } from "./graph";
-import { Queue } from "devfox-ts-adt-queue";
+import { Queue } from "devfox-queue";
 
 export const enum Algorithm {
   BREADTH_FIRST,

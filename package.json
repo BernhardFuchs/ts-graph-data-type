@@ -23,7 +23,7 @@
     "url": "https://github.com/BernhardFuchs/ts-graph-data-type.git"
   },
   "dependencies": {
-    "devfox-ts-adt-queue": "^1.0.0"
+    "devfox-queue": "^1.0.0"
   },
   "devDependencies": {
     "@types/jest": "^24.0.20",
