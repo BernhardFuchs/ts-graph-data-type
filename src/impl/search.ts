@@ -13,15 +13,15 @@ export interface SearchOptions {
 }
 const defaultOptions: SearchOptions = {
   algorithm: Algorithm.BREADTH_FIRST,
-  level: null
+  level: undefined
 };
 
 const isDefaultAlgorithm = (searchOptions: SearchOptions) =>
   searchOptions.algorithm === defaultOptions.algorithm;
 const isInfiniteSearch = (searchOptions: SearchOptions) =>
-  searchOptions.level === null;
+  searchOptions.level === undefined;
 const isSearchLevelValid = (searchOptions: SearchOptions) =>
-  searchOptions.level <= 0;
+  searchOptions.level > 0;
 const isQueueEmpty = <T>(_q: Queue<Node<T>>) => _q.size === 0;
 const increaseDepth = (nodesTillDepthIncrease: number) =>
   nodesTillDepthIncrease === 0;
@@ -29,15 +29,21 @@ const increaseDepth = (nodesTillDepthIncrease: number) =>
 const endSearch = <T>(graph: Graph<T>, visited: Map<T, boolean>) =>
   graph.nodes.filter(node => visited.get(node.key));
 
-export const search = <T>(
+export const getDescendants = <T>(
   graph: Graph<T>,
   startingNodeKey: T,
-  searchOptions?: SearchOptions
+  searchOptions: SearchOptions = {
+    algorithm: Algorithm.BREADTH_FIRST,
+    level: undefined
+  }
 ): Node<T>[] => {
   const _searchOptions = searchOptions || defaultOptions;
   const _startingNode: Node<T> = graph.findNode(startingNodeKey);
 
-  if (!isInfiniteSearch(_searchOptions) && isSearchLevelValid(_searchOptions)) {
+  if (
+    !isInfiniteSearch(_searchOptions) &&
+    !isSearchLevelValid(_searchOptions)
+  ) {
     return [_startingNode];
   }
 
