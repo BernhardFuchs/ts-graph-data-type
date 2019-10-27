@@ -1,4 +1,4 @@
-import { Graph } from "./graph";
+import { Graph, Direction } from "./graph";
 import { Entities } from "./entities";
 import Node = Entities.Node;
 
@@ -8,7 +8,7 @@ const nodeFactory = <T>(key: T): Node<T> => {
 
 const graphFactory = (
   numberOfNodes: number,
-  direction: string
+  direction: Direction
 ): Graph<number> => {
   const graph = new Graph<number>(direction);
   for (let i = 0; i < numberOfNodes; i++) {
@@ -18,7 +18,7 @@ const graphFactory = (
   return graph;
 };
 
-export const circularGraph = (direction: string = ""): Graph<number> => {
+export const circularGraph = (direction: Direction = Direction.NON_DIRECTED): Graph<number> => {
   const numberOfNodes = 7;
   const graph = graphFactory(numberOfNodes, direction);
   graph.addEdge(0, 1);
@@ -52,12 +52,7 @@ describe("Graph tests", () => {
   };
 
   test("should create a correct directed graph lowercase", () => {
-    const graph: Graph<number> = new Graph("DIRECTED");
-    directedGraphTest(graph);
-  });
-
-  test("should create a correct directed graph random case", () => {
-    const graph: Graph<number> = new Graph("DiReCteD");
+    const graph: Graph<number> = new Graph(Direction.DIRECTED);
     directedGraphTest(graph);
   });
 

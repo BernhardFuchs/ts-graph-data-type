@@ -2,6 +2,7 @@ import { Entities } from "./entities";
 import Node = Entities.Node;
 import { circularGraph } from "./graph.spec";
 import { getDescendants } from "./search";
+import { Direction } from './graph';
 
 describe("Graph search non directed graph", () => {
   const nonDirectedGraph = circularGraph();
@@ -108,7 +109,7 @@ describe("Graph search non directed graph", () => {
 });
 
 describe("Graph search directed graph", () => {
-  const directedGraph = circularGraph("DIRECTED");
+  const directedGraph = circularGraph(Direction.DIRECTED);
 
   test("should return correct nodes for infinite depth", () => {
     const startingNode: number = 0;

@@ -2,17 +2,16 @@ import { Entities } from "./entities";
 import Node = Entities.Node;
 import Edge = Entities.Edge;
 
+export enum Direction {
+  DIRECTED,
+  NON_DIRECTED
+}
+
 export class Graph<T> {
   private _nodes: Node<T>[] = [];
   private _edges: Edge<T>[] = [];
-  private _isDirected: boolean;
-  private readonly DIRECTED: string = "DIRECTED";
 
-  constructor(private direction: string = "") {
-    this._isDirected = this.direction.toUpperCase().match(this.DIRECTED)
-      ? true
-      : false;
-  }
+  constructor(private _direction: Direction = Direction.NON_DIRECTED) {}
 
   public get nodes(): Node<T>[] {
     return this._nodes;
@@ -36,7 +35,7 @@ export class Graph<T> {
 
     node1.children.push(node2);
 
-    if (!this._isDirected) {
+    if (this._direction === Direction.NON_DIRECTED) {
       node2.children.push(node1);
     }
 
